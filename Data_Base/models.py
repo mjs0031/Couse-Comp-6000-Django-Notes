@@ -28,11 +28,13 @@ class Artist(models.Model):
     # Natural Fields
     first_name      = models.CharField(max_length=15)
     last_name       = models.CharField(max_length=15, blank=True)
-    date_registered = models.DateTimeField(default=datetime.now()) 
        
     def __unicode__(self):
-        name = '%s, %s:' % (self.last_name, self.first_name)
-        return '%s, %s' % (name, self.date_registered)
+        if not (self.last_name == ''):
+            return '%s, %s' % (self.last_name, self.first_name)
+        else:
+            return '%s'     % (self.first_name)
+
     
     class Meta:
         verbose_name        = "Artist"
@@ -61,7 +63,7 @@ class Album(models.Model):
     available = models.BooleanField(default=True)
        
     def __unicode__(self):
-        return '%s: %s, %s' % (self.name, self.artist, self.year)
+        return '%s: %s (%s)' % (self.name, self.artist, self.year)
     
     class Meta:
         verbose_name        = "Album"

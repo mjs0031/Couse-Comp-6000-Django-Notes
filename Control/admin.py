@@ -22,6 +22,39 @@ from Data_Base.models import (Artist,
 
  """
 
-admin.site.register(Artist)
-admin.site.register(Album)
-admin.site.register(Song)
+
+class ArtistAdmin(admin.ModelAdmin):
+    list_display  = ('id', 'last_name', 'first_name')
+    search_fields = ['last_name', 'first_name']
+    ordering      = ['last_name']
+    fieldsets     = (               
+        ( 'Advanced options', {
+            'classes': ('wide', 'extrapretty'),
+            'fields' : ('first_name', 'last_name')
+                 }),)
+    
+class AlbumAdmin(admin.ModelAdmin):
+    list_display  = ('id', 'name', 'artist', 'year', 'genre')
+    list_filter   = ('genre',)
+    search_fields = ['name', 'artist']
+    ordering      = ['name', 'artist']
+    fieldsets     = (               
+        ( 'Advanced options', {
+            'classes': ('wide', 'extrapretty'),
+            'fields' : ('name', 'artist', 'genre', 'year', 'price',
+                        'available')
+                 }),)   
+    
+class SongAdmin(admin.ModelAdmin):
+    list_display  = ('name', 'album')
+    search_fields = ['name',]
+    ordering      = ['name',]
+    fieldsets     = (               
+        ( 'Advanced options', {
+            'classes': ('wide', 'extrapretty'),
+            'fields' : ('name', 'album')
+                 }),)  
+
+admin.site.register(Artist, ArtistAdmin)
+admin.site.register(Album, AlbumAdmin)
+admin.site.register(Song, SongAdmin)

@@ -304,8 +304,8 @@ def main():
      }
      """
     current_artist = Artist.objects.create(
-                        first_name = 'Infected',
-                        last_name  = 'Mushroom'                   
+                        first_name = 'Infected Mushroom',
+                        last_name  = ''                   
                             )
      
     current_album  = Album.objects.create(
@@ -332,8 +332,8 @@ def main():
      }
      """
     current_artist = Artist.objects.create(
-                        first_name = '2',
-                        last_name  = 'Cellos'                   
+                        first_name = '2 Cellos',
+                        last_name  = ''                   
                             )
      
     current_album  = Album.objects.create(
