@@ -1,0 +1,84 @@
+<html xmlns = "http://www.w3.org/1999/xhtml">
+<head>
+	<title>AJAX Album Search</title>
+	
+	<script type = "text/javascript" language = "JavaScript">
+	
+		<!--
+		
+		var asyncRequest;
+		
+		window.onload = function()
+		{
+			document.getElementById('searchButton').onclick = function()
+			{
+				var searchString = document.getElementById('searchBox').value;
+				
+				getContent('/search/album/' + searchString);	    
+			}
+		}
+		
+		function getContent(url)
+		{
+			try
+			{
+				asyncRequest = new XMLHttpRequest();
+				asyncRequest.onreadystatechange = stateChange;
+				asyncRequest.open('GET', url, true)
+				asyncRequest.send( null );
+			}
+			catch(exception)
+			{
+				alert('failed');
+			}
+		}
+		
+		function stateChange()
+		{
+			if ( asyncRequest.readyState == 4 && asyncRequest.status == 200 )
+			{
+				document.getElementById('searchResults').innerHTML = 
+						 asyncRequest.responseText; 
+
+			}
+		}
+		-->
+	
+	</script>
+
+</head>
+
+<body>
+
+	<h1><b><i>Search: Album</i></b></h1>
+	
+	<hr>
+	<h3>Search for an album by name:</h3>
+	<input type='text' size='24' id='searchBox'>
+	</input>
+	<button id='searchButton'>Find an album!</button>
+	
+	<hr>
+	<table id='searchResults'>
+	
+	</table>
+
+	<br>
+	<br>
+	<hr>
+	<h3>Links:</h3>
+
+	<ul>
+		<i>Search Options:</i>
+		<li><a href="/search/artist/">Search Artist</a></li>
+		<li><a href="/search/song/">Search Song</a></li>
+		<li><a href="/search/global/">Search Entire DataBase</a></li>
+		<p></p>
+		<i>Commit Data:</i>
+		<li><a href="/add/album/">Add Album</a></li>
+		<li><a href="/add/artist/">Add Artist</a></li>
+		<li><a href="/add/song/">Add Song</a></li>
+	</ul>
+</body>
+
+</html>
