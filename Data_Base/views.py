@@ -5,7 +5,7 @@ import random, string, unicodedata
 from django.template.loader import get_template
 from django.template import Context, RequestContext
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 
 """ Internal Package Imports """
 from Control.choice_lists import GENRE_TYPES
@@ -44,46 +44,50 @@ def commit_album(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST)
         if form.is_valid():
-            Album.objects.create(
-                artist    = Artist.objects.get(pk=1),
+            pointer = Album.objects.create(
+                artist    = form.cleaned_data['artist'],
                 name      = form.cleaned_data['name'],
                 genre     = form.cleaned_data['genre'],
                 year      = form.cleaned_data['year'],
                 price     = form.cleaned_data['price'],
                 available = form.cleaned_data['available'],
                         )
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/album/%s' % (pointer.id))
     else:
         form = AlbumForm()
-    return render_to_response('add_album.html', locals())
-
+    return render(request, 'add_album.html', RequestContext(request, {
+                                                        'form': form,                
+                                                        }))
 
 def commit_artist(request):  
     if request.method == 'POST':
         form = ArtistForm(request.POST)
         if form.is_valid():
-            Artist.objects.create(
+            pointer = Artist.objects.create(
                 first_name = form.cleaned_data['first_name'],
                 last_name  = form.cleaned_data['last_name'],
                         )
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/artist/%s' % (pointer.id))
     else:
         form = ArtistForm()
-    return render_to_response('add_artist.html', locals())
-
+    return render(request, 'add_artist.html', RequestContext(request, {
+                                                        'form': form,               
+                                                        }))
 
 def commit_song(request):  
     if request.method == 'POST':
         form = SongForm(request.POST)
         if form.is_valid():
-            Song.objects.create(
-                album = Album.objects.get(pk=1),
+            pointer = Song.objects.create(
+                album = form.cleaned_data['album'],
                 name  = form.cleaned_data['name'],
                         )
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/song/%s' % (pointer.id))
     else:
         form = SongForm()
-    return render_to_response('add_song.html', locals())
+    return render(request, 'add_song.html', RequestContext(request, {
+                                                    'form': form,                 
+                                                    }))
 
 
 """
@@ -134,5 +138,26 @@ def ajax_song_search(request, searchString):
                                 "results": results,
                                 "found": found,
                                 })
+
     
-    
+"""
+ {
+  DISPLAY BLOCK
+ }
+ """    
+def specific_artist(request, offset):
+    offset = int(offset)
+    artist = Artist.objects.get(pk=offset)
+    albums = Album.objects.filter(artist=artist)
+    return render_to_response('specific_artist.html', locals())
+
+def specific_album(request, offset):
+    offset = int(offset)
+    album  = Album.objects.get(pk=offset)
+    songs  = Song.objects.filter(album=album)
+    return render_to_response('specific_album.html', locals())
+
+def specific_song(request, offset):
+    offset = int(offset)
+    song   = Song.objects.get(pk=offset)
+    return render_to_response('specific_song.html', locals())

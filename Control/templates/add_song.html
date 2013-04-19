@@ -7,7 +7,11 @@
 	<h1><i>Add a song!</i></h1>
 	<hr>
 
-		<h1> STUFF GOES HERE </h1>
+		<form action="." method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Commit"/>
+		</form>
 
 	<hr>
 	<h3>Links:</h3>
@@ -17,7 +21,6 @@
 		<li><a href="/search/album/">Search Album</a></li>
 		<li><a href="/search/artist/">Search Artist</a></li>
 		<li><a href="/search/song/">Search Song</a></li>
-		<li><a href="/search/global/">Search Entire DataBase</a></li>
 		<p></p>
 		<i>Commit Data:</i>
 		<li><a href="/add/album/">Add Album</a></li>

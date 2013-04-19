@@ -6,22 +6,22 @@
 
 	<p><i>
 	{% if found %}
-		The following match your search 
-		<br>
-		criteria:
+		<h3><i>The following match your search criteria:</i></h3> 
 	{% else %}
-		No matching jobs were found.
+		<h3><i>No matching artist were found.</i></h3>
 		<br>
-		These are all pending jobs.
+		<h3><i>These are all current known artists.</i></h3> 
 	{% endif %}
 	</i></p>
 
 	<br>
+
+	<br>
 	<table>
-		<tr><td width="150"><i><b>Position:</b></i></td><td width="400"><i><b>Company:</b></i></td>
-																	<td><i><b>Description</b></i></td></tr>
-		{% for job in results %}
-			<tr><td>{{artist.first_name}}</td><td>{{artist.last_name}}</td><td>{{album.last_name}}</td></tr>
+		{% for artist in results %}
+		<tr><td width="150"><i>First Name ::</i></td><td width="750"><a href="/artist/{{ artist.id }}">{{ artist.first_name }}</a></td></tr>
+		<tr><td width="150"><i>Last Name ::</i></td><td>{{ artist.last_name }}</td></tr>
+		<tr><td width="150"><i>Artist ID ::</i></td><td>{{ artist.id }}</td></tr>
 		{% endfor %}
 	</table>
 	

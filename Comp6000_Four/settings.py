@@ -9,6 +9,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+LOGIN_REDIRECT_URL  = '/'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', 
@@ -58,13 +60,17 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+CONTEXT_PROCESSORS = (
+    'django.core.context_processors.csrf',              
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'Comp6000_Four.urls'

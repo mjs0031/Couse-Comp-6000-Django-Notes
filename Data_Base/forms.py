@@ -21,51 +21,30 @@ from Data_Base.models import (Album, Artist, Song)
 
  """
  
+ 
 """
  ALBUM Form
 """
 class AlbumForm(forms.Form):
-    class Meta:
-        model = Album
-        fields = (
-            'name',
-            'genre',
-            'year',
-            'price',
-            'available',
-        )
-        widgets = {
-            'name': forms.widgets.TextInput(attrs={'placeholder': 'Name'}),
-            'genre': forms.Select(choices=GENRE_TYPES, attrs={'class': 'selectpicker'}), 
-            'year': forms.widgets.TextInput(attrs={'placeholder': 'Year'}),
-            'price': forms.widgets.TextInput(attrs={'placeholder': 'Price'}),
-            'available': forms.widgets.CheckboxInput(attrs={'placeholder': 'Available'}),
-        }
+    artist    = forms.ModelChoiceField(queryset=Artist.objects.all())
+    name      = forms.CharField(max_length=30)
+    genre     = forms.ChoiceField(choices=GENRE_TYPES, widget=forms.Select)
+    year      = forms.IntegerField()
+    price     = forms.DecimalField(max_digits=10, decimal_places=2)
+    available = forms.BooleanField(required=False)
+
 
 """
  ARTIST Form
-"""        
+"""            
 class ArtistForm(forms.Form):
-    class Meta:
-        model = Artist
-        fields = (
-            'first_name',
-            'last_name',
-        )
-        widgets = {
-            'first_name': forms.widgets.TextInput(attrs={'placeholder': 'First Name'}),
-            'last_name': forms.widgets.TextInput(attrs={'placeholder': 'Last Name'}),
-        }
+    first_name = forms.CharField(max_length=15)
+    last_name = forms.CharField(max_length=15, required=False)
+ 
         
 """
  SONG Form
-"""        
+"""     
 class SongForm(forms.Form):
-    class Meta:
-        model = Song
-        fields = (
-            'name',
-        )
-        widgets = {
-            'name': forms.widgets.TextInput(attrs={'placeholder': 'Name'}),
-        }
+    album = forms.ModelChoiceField(queryset=Album.objects.all())
+    name = forms.CharField(max_length=30)

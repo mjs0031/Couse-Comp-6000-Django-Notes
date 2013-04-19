@@ -1,25 +1,15 @@
-<html xmlns = "http://www.w3.org/1999/xhtml">
+<html>
 <head>
+	<title>Album</title>
 </head>
 
 <body>
-
-	<p><i>
-	{% if found %}
-		<h3><i>The following match your search criteria:</i></h3> 
-	{% else %}
-		<h3><i>No matching albums were found.</i></h3>
-		<br>
-		<h3><i>These are all current known albums.</i></h3> 
-	{% endif %}
-	</i></p>
-
-	<br>
-		{% for album in results %}
-			<br>
-			<table>
-			<tr><td width="150"><i>Name ::</i></td><td width="750"><a href="/album/{{album.id}}">{{ album.name }}</a></td></tr>
-			<tr><td width="150"><i>Artist ::</i></td><td><a href="/artist/{{ album.artist.id }}">{{ album.artist }}</a></td></tr>
+	<h1><i>Data_Base: Specific Album</i></h1>
+	
+	<hr>
+	<table>
+			<tr><td width="150"><i>Name ::</i></td><td width="750">{{ album.name }}</td></tr>
+			<tr><td width="150"><i>Artist ::</i></td><td><a href="/artist/{{album.artist.id}}">{{ album.artist }}</a></td></tr>
 			<tr><td width="150"><i>Album ID ::</i></td><td>{{ album.id }}</td></tr>
 			<tr><td width="150"><i>Year ::</i></td><td>{{ album.year }}</td></tr>
 		{% if album.genre = 'C' %}
@@ -47,9 +37,32 @@
 		{% else %}
 			<tr><td width="150"><i>Available ::</i></td><td><b><i>NO</b></i></td></tr>
 		{% endif %}
-			</table>
-		{% endfor %}
 	</table>
 	
+	<br>
+	<hr>
+	<h3><i>Known Tracks ::</i></h3>
+		{% for song in songs %}
+			<br>
+			<table>
+				<tr><td width="150"><i>Name ::</i></td><td width="750"><a href="/song/{{song.id}}">{{ song.name }}</a></td></tr>
+				<tr><td width="150"><i>Song ID ::</i></td><td>{{ song.id }}</td></tr>
+			</table>
+		{% endfor %}
+	<hr>
+	<h3>Links:</h3>
+	
+	<ul>
+		<i>Search Options:</i>
+		<li><a href="/search/album/">Search Album</a></li>
+		<li><a href="/search/artist/">Search Artist</a></li>
+		<li><a href="/search/song/">Search Song</a></li>
+		<p></p>
+		<i>Commit Data:</i>
+		<li><a href="/add/album/">Add Album</a></li>
+		<li><a href="/add/artist/">Add Artist</a></li>
+		<li><a href="/add/song/">Add Song</a></li>
+	</ul>
+	
 </body>
-</html>	
+</html>

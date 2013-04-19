@@ -14,7 +14,7 @@ from django.contrib import admin
 
  Author:      Matthew J Swann;               
  Version:     1.0
- Last Update: 2013-04-18
+ Last Update: 2013-04-19
  Update By:   Matthew J Swann
  
  Code for website urls.
@@ -37,10 +37,14 @@ urlpatterns = patterns('',
     
     # SEARCH PAGES
     url(r'^search/album/$', 'Data_Base.views.ajax_album_home', name='ajax_album_home'),
-    url(r'^search/album/(\w+)/$', 'Data_Base.views.ajax_album_search', name='ajax_album_search'),
     url(r'^search/artist/$', 'Data_Base.views.ajax_artist_home', name='ajax_artist_home'),
-    url(r'^search/artist/(\w+)/$', 'Data_Base.views.ajax_artist_search', name='ajax_artist_search'),
     url(r'^search/song/$', 'Data_Base.views.ajax_song_home', name='ajax_song_home'),    
+    url(r'^search/album/(\w+)/$', 'Data_Base.views.ajax_album_search', name='ajax_album_search'),
+    url(r'^search/artist/(\w+)/$', 'Data_Base.views.ajax_artist_search', name='ajax_artist_search'),
     url(r'^search/song/(\w+)/$', 'Data_Base.views.ajax_song_search', name='ajax_song_search'),      
 
+    # DISPLAY PAGES
+    url(r'^album/(\d+)/$', 'Data_Base.views.specific_album', name='specifc_album'),
+    url(r'^artist/(\d+)/$', 'Data_Base.views.specific_artist', name='specific_artist'),
+    url(r'^song/(\d+)/$', 'Data_Base.views.specific_song', name='specific_song'),
 )

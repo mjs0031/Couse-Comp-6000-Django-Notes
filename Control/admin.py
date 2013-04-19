@@ -46,7 +46,7 @@ class AlbumAdmin(admin.ModelAdmin):
                  }),)   
     
 class SongAdmin(admin.ModelAdmin):
-    list_display  = ('name', 'album')
+    list_display  = ('id', 'name', 'album')
     search_fields = ['name',]
     ordering      = ['name',]
     fieldsets     = (               
